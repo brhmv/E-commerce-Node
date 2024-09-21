@@ -84,7 +84,12 @@ router.post('/refresh', (req, res) => {
 
     try {
         const verified = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+
+        console.log(verified);
+
         const accessToken = generateAccessToken(verified);
+
+
         res.json({ accessToken });
     } catch (err) {
         res.status(400).send('Invalid token');

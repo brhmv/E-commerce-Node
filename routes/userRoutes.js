@@ -12,7 +12,11 @@ router.get('/me', authenticateAccessToken, async (req, res) => {
         if (!user) {
             return res.status(404).send('User not found');
         }
+
+
         res.json(user);
+
+        console.log(user);
     } catch (error) {
         res.status(500).send(`Error fetching user details: ${error.message}`);
     }
@@ -73,7 +77,7 @@ router.get('/:id', authenticateAccessToken, isAdmin, async (req, res) => {
 });
 
 //edit by id
-router.put('/:id', authenticateAccessToken, isAdmin, async (req, res) => {
+router.put('/:id', authenticateAccessToken, async (req, res) => {
     try {
         const { id } = req.params;
         const { username, email, password } = req.body;
